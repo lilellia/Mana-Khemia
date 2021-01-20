@@ -2,13 +2,33 @@ import re
 import sys
 
 
+def _parse(text):
+    # replace \jablank
+    text = text.replace('\\jablank', '・・・ ・・・ ・・・。')
+
+    # replace \starred{...}
+    text = re.sub(r'\\starred{(.*?)}', '*\1*', text)
+
+    # replace \highlightItem{...}
+    text = re.sub(r'\\highlightItem{(.*?)}', '<span class="highlight-item">\1</span>', text)
+
+    # replace \highlightLocation{...}
+    text = re.sub(r'\\highlightLocation{(.*?)}', '<span class="highlight-location">\1</span>', text)
+
+    # fix quotation marks
+    text = re.sub(r"``(.*?)''", r'"\1"', text)
+
+    return text
+
+
 def parse_line(line: str) -> str:
-    if (match := re.match(r'.item\[(?P<name>\w*?)\]\s*(?P<ja>.*?)\s*\\\\\s*\((?P<en>.*?)\)', line)):
+    if (match := re.match(r'.item\[(?P<name>[A-Z ]*?)\]\s*(?P<ja>.*?)\s*\\\\\s*\((?P<en>.*?)\)', line)):
         data = dict(
             name=match.group('name'),
-            ja=match.group('ja').replace('\\jablank', '・・・ ・・・ ・・・'),
-            en=match.group('en')
+            ja=_parse(match.group('ja')),
+            en=_parse(match.group('en'))
         )
+
         return f'''
         <p class="dialogue">
             <span class="speaker">{data["name"]}</span>
@@ -34,7 +54,7 @@ def parse_line(line: str) -> str:
 def main(block: str):
     with open('html-output.html', 'w+') as f:
         for line in block.splitlines():
-            f.write(parse_line(line))
+            f.write(parse_line(line.strip()))
 
 
 if __name__ == '__main__':

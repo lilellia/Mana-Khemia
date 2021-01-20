@@ -16,7 +16,6 @@ p.dialogue {
 }
 
 span.speaker {
-    font-family: 'Noto Serif JP', serif;
     font-weight: 900;
 }
 
@@ -28,15 +27,44 @@ span.english {
     margin-left: 3%;
 }
 
-/* add music notes (and space) before and after the text in the element, centering everything */
-p.lyric {
+p.center {
+    margin-left: 2%;
+    margin-right: 50%;
     text-align: center;
 }
 
+/* add music notes (and space) before and after the text in the element, centering everything */
 p.lyric::before {
-    content: "&#x266B;&nbsp;"
+    content: "♫　"
 }
 
 p.lyric::after {
-    content: "&nbsp;&#x266B;"
+    content: "　♫"
+}
+
+/* format chapter headers */
+
+th.chapter-start {
+    font-size: 175%;
+    font-weight: 900;
+    padding: 25px;
+}
+
+td.chapter-title {
+    font-size: 175%;
+    font-weight: 900;
+    padding: 25px;
+}
+
+td.chapter-title::before {
+    content: "〜 ";
+}
+
+td.chapter-title::after {
+    content: " 〜";
+}
+
+/* static text */
+div.static-text li {
+    font-style: italic;
 }
