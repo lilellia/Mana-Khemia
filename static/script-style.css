@@ -98,9 +98,7 @@ div.assignment-head {
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
-div.assignment-head p {
     color: #333;
     font-weight: 900;
 }
@@ -113,4 +111,8 @@ div.assignment-head.start {
 div.assignment-head.complete {
     background-color: #c6effc;
     border: 3px solid #b8e7f9;
+}
+
+div.tabbed-container {
+    background-color: #aaa;
 }
