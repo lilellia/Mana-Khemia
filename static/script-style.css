@@ -34,6 +34,12 @@ p.center {
 }
 
 /* add music notes (and space) before and after the text in the element, centering everything */
+p.lyric {
+    margin-left: 2%;
+    margin-right: 50%;
+    text-align: center;
+}
+
 p.lyric::before {
     content: "♫　"
 }
@@ -77,5 +83,26 @@ span.highlight-item {
 
 span.highlight-location {
     font-weight: 900;
-    color: #900000;
+    color: #c00000;
+}
+
+p.next-button {
+    margin: 25px;
+    padding: 10px;
+    text-align: right;
+}
+
+div.assignment {
+    width: 50%;
+    opacity: 35%;
+}
+
+div.assignment.start {
+    background-color: rgb(255, 239, 14);
+    content: "Assignment Start!"
+}
+
+div.assignment.complete {
+    background-color: rgb(51, 55, 255);
+    content: "Assignment Complete!"
 }

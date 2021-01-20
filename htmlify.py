@@ -3,6 +3,9 @@ import sys
 
 
 def _parse(text):
+    # replace newline
+    text = text.replace("\\\\", '<br/>')
+
     # replace \&
     text = text.replace('\\&', '&amp;')
 
@@ -13,10 +16,10 @@ def _parse(text):
     text = re.sub(r'\\starred\{(.*?)\}', r'*\1*', text)
 
     # replace \highlightItem{...}
-    text = re.sub(r'\\highlightItem{(.*?)}', '<span class="highlight-item">\1</span>', text)
+    text = re.sub(r'\\highlightItem{(.*?)}', r'<span class="highlight-item">\1</span>', text)
 
     # replace \highlightLocation{...}
-    text = re.sub(r'\\highlightLocation{(.*?)}', '<span class="highlight-location">\1</span>', text)
+    text = re.sub(r'\\highlightLocation{(.*?)}', r'<span class="highlight-location">\1</span>', text)
 
     # fix quotation marks
     text = re.sub(r"``(.*?)''", r'"\1"', text)
@@ -26,6 +29,7 @@ def _parse(text):
 
 def parse_line(line: str) -> str:
     if (match := re.match(r'.item\[(?P<name>[A-Z ]*?)\]\s*(?P<ja>.*?)\s*\\\\\s*\((?P<en>.*?)\)', line)):
+        # japanese and english text
         data = dict(
             name=match.group('name'),
             ja=_parse(match.group('ja')),
@@ -40,8 +44,22 @@ def parse_line(line: str) -> str:
         </p>'''
     elif line.strip() == '':
         return ''
+    elif (match := re.match(r'.item\[(?P<name>[A-Z ]*?)\]\s*(?P<en>.*)', line)):
+        # english text only
+        data = dict(
+            name=match.group('name'),
+            ja='',
+            en=_parse(match.group('en'))
+        )
+
+        return f'''
+        <p class="dialogue">
+            <span class="speaker">{data["name"]}</span>
+            <span class="japanese">{data["ja"]}</span> <br/>
+            <span class="english">{data["en"]}</span>
+        </p>'''
     elif line.startswith('\\SD'):
-        direction = re.fullmatch(r'\\SD{(.*)?}', line).group(1)
+        direction = _parse(re.fullmatch(r'\\SD{(.*)?}', line).group(1))
         return f'''<p class="stage-direction">{direction}</p>\n'''
     elif line.startswith('\\vskip'):
         return '&nbsp;\n'
