@@ -1,0 +1,42 @@
+body {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 400;
+}
+
+p.stage-direction {
+    font-style: italic;
+    margin-left: 2%;
+    margin-right: 50%;
+    padding: 5px;
+    border-left: 1px #5d1f75;
+}
+
+p.dialogue {
+    margin: 10px;
+}
+
+span.speaker {
+    font-family: 'Noto Serif JP', serif;
+    font-weight: 900;
+}
+
+span.japanese {
+    margin-left: 10px;
+}
+
+span.english {
+    margin-left: 3%;
+}
+
+/* add music notes (and space) before and after the text in the element, centering everything */
+p.lyric {
+    text-align: center;
+}
+
+p.lyrics::before {
+    content: "&#x266B;&nbsp;"
+}
+
+p.lyrics::after {
+    content: "&nbsp;&#x266B;"
+}
