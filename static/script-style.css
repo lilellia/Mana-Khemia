@@ -78,12 +78,12 @@ div.static-text li {
 
 span.highlight-item {
     font-weight: 900;
-    color: #009000;
+    color: #00d000;
 }
 
 span.highlight-location {
     font-weight: 900;
-    color: #c00000;
+    color: #e00000;
 }
 
 p.next-button {
@@ -92,17 +92,25 @@ p.next-button {
     text-align: right;
 }
 
-div.assignment {
+div.assignment-head {
     width: 50%;
-    opacity: 35%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-div.assignment.start {
-    background-color: rgb(255, 239, 14);
-    content: "Assignment Start!"
+div.assignment-head p {
+    color: #333;
+    font-weight: 900;
 }
 
-div.assignment.complete {
-    background-color: rgb(51, 55, 255);
-    content: "Assignment Complete!"
+div.assignment-head.start {
+    background-color: #fffad8;
+    border: 3px solid #ffe3a9;
+}
+
+div.assignment-head.complete {
+    background-color: #c6effc;
+    border: 3px solid #b8e7f9;
 }
