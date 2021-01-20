@@ -3,11 +3,14 @@ import sys
 
 
 def _parse(text):
+    # replace \&
+    text = text.replace('\\&', '&amp;')
+
     # replace \jablank
-    text = text.replace('\\jablank', '・・・ ・・・ ・・・。')
+    text = text.replace('\\jablank', '・・・ ・・・ ・・・')
 
     # replace \starred{...}
-    text = re.sub(r'\\starred{(.*?)}', '*\1*', text)
+    text = re.sub(r'\\starred\{(.*?)\}', r'*\1*', text)
 
     # replace \highlightItem{...}
     text = re.sub(r'\\highlightItem{(.*?)}', '<span class="highlight-item">\1</span>', text)

@@ -68,3 +68,14 @@ td.chapter-title::after {
 div.static-text li {
     font-style: italic;
 }
+
+
+span.highlight-item {
+    font-weight: 900;
+    color: #009000;
+}
+
+span.highlight-location {
+    font-weight: 900;
+    color: #900000;
+}
