@@ -28,7 +28,7 @@ def _parse(text):
 
 
 def parse_line(line: str) -> str:
-    if (match := re.match(r'.item\[(?P<name>[A-Z ]*?)\]\s*(?P<ja>.*?)\s*\\\\\s*\((?P<en>.*?)\)', line)):
+    if (match := re.match(r'.item\[(?P<name>[A-Z ?]*?)\]\s*(?P<ja>.*?)\s*\\\\\s*\((?P<en>.*?)\)', line)):
         # japanese and english text
         data = dict(
             name=match.group('name'),
